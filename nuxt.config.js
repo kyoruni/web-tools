@@ -39,7 +39,10 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
   ],
-
+  server: {
+    port: 7777,
+    host: '0.0.0.0'
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
