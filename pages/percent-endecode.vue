@@ -12,6 +12,7 @@
     <textarea class="textarea textarea-primary textarea-md w-full h-32" placeholder="出力" v-model="outputText"></textarea>
     <button class="btn btn-primary w-40 mt-4 mb-4" @click="execute">実行</button>
     <button class="btn btn-secondary w-40 mt-4 mb-4" :class="{ 'btn-disabled': isOutputEmpty }" v-clipboard:copy="outputText" v-clipboard:success="onSuccess" v-clipboard:error="onError" :aria-disabled="isOutputEmpty">結果をコピー</button>
+    <button class="btn btn-accent w-40 mb-4" @click="clear">クリア</button>
   </div>
 </template>
 
@@ -41,6 +42,10 @@ export default defineComponent({
         outputText.value = decodeURIComponent(inputText.value);
       }
     });
+    const clear = (() => {
+      inputText.value = '';
+      outputText.value = '';
+    });
     const onSuccess = () => {
       alert('コピーしました！');
     };
@@ -57,6 +62,7 @@ export default defineComponent({
       outputText,
       onChange,
       execute,
+      clear,
       onSuccess,
       onError,
       isOutputEmpty,
