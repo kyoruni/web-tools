@@ -1,6 +1,6 @@
 <template>
   <div class="hoge">
-    <Icon/>
+    <Icon :kind="'star'"/>
   </div>
 </template>
 
