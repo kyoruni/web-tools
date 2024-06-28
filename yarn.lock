@@ -1909,6 +1909,18 @@
     webpack-node-externals "^3.0.0"
     webpackbar "^6.0.1"
 
+"@nuxtjs/composition-api@^0.34.0":
+  version "0.34.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/composition-api/-/composition-api-0.34.0.tgz#4608b712164958c0efdbd3e8195137a2d6243391"
+  integrity sha512-2BWv4zmlFhu09eo8oeXk11jVdsRLh6vXwtaDADMaZ8Do8SoY2fEk3dmtAkr3aUQuSIzOD/jdWBnd0h99/YIrSA==
+  dependencies:
+    defu "^6.1.4"
+    estree-walker "^2.0.2"
+    fs-extra "^11.2.0"
+    magic-string "^0.30.9"
+    pathe "^1.1.2"
+    ufo "^1.5.3"
+
 "@nuxtjs/eslint-config-typescript@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/eslint-config-typescript/-/eslint-config-typescript-11.0.0.tgz#748a0cc063a5cf93ec52dc2d5a2ed94309cacb5b"
@@ -6745,7 +6757,7 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-magic-string@^0.30.0, magic-string@^0.30.10:
+magic-string@^0.30.0, magic-string@^0.30.10, magic-string@^0.30.9:
   version "0.30.10"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.10.tgz#123d9c41a0cb5640c892b041d4cfb3bd0aa4b39e"
   integrity sha512-iIRwTIf0QKV3UAnYK4PU8uiEc4SRh5jX0mwpIwETPpHdhVM4f53RSwS/vXvN1JhGX+Cs7B8qIq3d6AH49O5fAQ==
