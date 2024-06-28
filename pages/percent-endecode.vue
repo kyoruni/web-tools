@@ -10,7 +10,7 @@
     </div>
     <textarea class="textarea textarea-primary textarea-md w-full h-32 mb-4" placeholder="入力" v-model="inputText"></textarea>
     <textarea class="textarea textarea-primary textarea-md w-full h-32" placeholder="出力" v-model="outputText"></textarea>
-    <button class="btn btn-primary w-40 mt-4 mb-4" :class="{ 'btn-disabled': isInputEmpty }" :aria-disabled="isInputEmpty" @click="execute">実行</button>
+    <button class="btn btn-primary w-40 mt-4 mb-4" @click="execute">実行</button>
     <button class="btn btn-secondary w-40 mt-4 mb-4" :class="{ 'btn-disabled': isOutputEmpty }" v-clipboard:copy="outputText" v-clipboard:success="onSuccess" v-clipboard:error="onError" :aria-disabled="isOutputEmpty">結果をコピー</button>
   </div>
 </template>
@@ -30,6 +30,11 @@ export default defineComponent({
     });
 
     const execute = (() => {
+      if (inputText.value.length === 0) {
+        const optionKind = option.value === 'encode' ? 'エンコード' : 'デコード';
+        alert(`${optionKind}したいテキストを入力してください！`);
+        return;
+      }
       if (option.value === 'encode') {
         outputText.value = encodeURIComponent(inputText.value);
       } else {
@@ -43,9 +48,6 @@ export default defineComponent({
       alert('コピーに失敗しました…');
     };
 
-    const isInputEmpty = computed(() => {
-      return inputText.value.length === 0;
-    });
     const isOutputEmpty = computed(() => {
       return outputText.value.length === 0;
     });
@@ -57,7 +59,6 @@ export default defineComponent({
       execute,
       onSuccess,
       onError,
-      isInputEmpty,
       isOutputEmpty,
     }
   },
