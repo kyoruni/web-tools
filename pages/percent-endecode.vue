@@ -11,12 +11,12 @@
     <textarea class="textarea textarea-primary textarea-md w-full h-32 mb-4" placeholder="入力" v-model="inputText"></textarea>
     <textarea class="textarea textarea-primary textarea-md w-full h-32" placeholder="出力" v-model="outputText"></textarea>
     <button class="btn btn-primary w-40 mt-4 mb-4">実行</button>
-    <button class="btn btn-secondary w-40 mt-4 mb-4" v-clipboard:copy="outputText" v-clipboard:success="onSuccess" v-clipboard:error="onError">結果をコピー</button>
+    <button class="btn btn-secondary w-40 mt-4 mb-4" :class="{ 'btn-disabled': isOutputEmpty }" v-clipboard:copy="outputText" v-clipboard:success="onSuccess" v-clipboard:error="onError" :aria-disabled="isOutputEmpty">結果をコピー</button>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref, computed } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup() {
@@ -34,6 +34,10 @@ export default defineComponent({
     const onError = () => {
       alert('コピーに失敗しました…');
     };
+
+    const isOutputEmpty = computed(() => {
+      return outputText.value.length === 0;
+    });
     return {
       option,
       inputText,
@@ -41,6 +45,7 @@ export default defineComponent({
       onChange,
       onSuccess,
       onError,
+      isOutputEmpty,
     }
   },
 })
