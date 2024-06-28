@@ -8,11 +8,41 @@
       <input type="radio" name="option" id="decode" :class="radioClass" value="decode" v-model="option" @change="onChange"/>
       <label for="decode" :class="labelClass">デコード</label>
     </div>
-    <textarea :class="textAreaClass" class="mb-4" placeholder="入力" v-model="inputText"></textarea>
-    <textarea :class="textAreaClass" placeholder="出力" v-model="outputText"></textarea>
-    <button class="btn btn-primary" :class="buttonClass" @click="execute">実行</button>
-    <button class="btn btn-secondary" :class="[isOutputEmpty ? 'btn-disabled' : '', buttonClass]" v-clipboard:copy="outputText" v-clipboard:success="onSuccess" v-clipboard:error="onError" :aria-disabled="isOutputEmpty">結果をコピー</button>
-    <button class="btn btn-accent" :class="buttonClass" @click="clear">クリア</button>
+    <textarea
+      :class="textAreaClass"
+      class="mb-4"
+      placeholder="入力"
+      v-model="inputText"
+    ></textarea>
+    <textarea
+      :class="textAreaClass"
+      placeholder="出力"
+      v-model="outputText"
+    ></textarea>
+    <button
+      class="btn btn-primary"
+      :class="buttonClass"
+      @click="execute"
+    >
+      実行
+    </button>
+    <button
+      class="btn btn-secondary"
+      :class="[isOutputEmpty ? 'btn-disabled' : '', buttonClass]"
+      v-clipboard:copy="outputText"
+      v-clipboard:success="onSuccess"
+      v-clipboard:error="onError"
+      :aria-disabled="isOutputEmpty"
+    >
+      結果をコピー
+    </button>
+    <button
+      class="btn btn-accent"
+      :class="buttonClass"
+      @click="clear"
+    >
+      クリア
+    </button>
   </div>
 </template>
 
@@ -34,6 +64,12 @@ export default defineComponent({
       inputText.value = '';
       outputText.value = '';
     });
+    const onSuccess = () => {
+      alert('コピーしました！');
+    };
+    const onError = () => {
+      alert('コピーに失敗しました…');
+    };
 
     const execute = (() => {
       if (inputText.value.length === 0) {
@@ -51,12 +87,6 @@ export default defineComponent({
       inputText.value = '';
       outputText.value = '';
     });
-    const onSuccess = () => {
-      alert('コピーしました！');
-    };
-    const onError = () => {
-      alert('コピーに失敗しました…');
-    };
 
     const isOutputEmpty = computed(() => {
       return outputText.value.length === 0;
@@ -66,10 +96,10 @@ export default defineComponent({
       inputText,
       outputText,
       onChange,
-      execute,
-      clear,
       onSuccess,
       onError,
+      execute,
+      clear,
       isOutputEmpty,
       radioClass,
       labelClass,
