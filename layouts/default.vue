@@ -5,7 +5,7 @@
     <div class="flex min-h-screen flex-col md:flex-row">
       <Menu class="w-full md:w-1/4" />
       <div class="content w-full md:w-3/4">
-        <nuxt class="p-2 pt-4" />
+        <nuxt class="p-4" />
       </div>
     </div>
   </div>
