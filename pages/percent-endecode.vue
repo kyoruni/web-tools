@@ -3,16 +3,16 @@
     <h2 class="text-xl font-extrabold pt-4">パーセントエンコード/デコードするやつ</h2>
     <div class="divider"></div>
     <div class="flex items-center pb-4">
-      <input type="radio" name="option" id="encode" class="radio radio-primary" value="encode" v-model="option" @change="onChange"/>
-      <label for="encode" class="label cursor-pointer pr-4">エンコード</label>
-      <input type="radio" name="option" id="decode" class="radio radio-primary" value="decode" v-model="option" @change="onChange"/>
-      <label for="decode" class="label cursor-pointer">デコード</label>
+      <input type="radio" name="option" id="encode" :class="radioClass" value="encode" v-model="option" @change="onChange"/>
+      <label for="encode" :class="labelClass" class="pr-4">エンコード</label>
+      <input type="radio" name="option" id="decode" :class="radioClass" value="decode" v-model="option" @change="onChange"/>
+      <label for="decode" :class="labelClass">デコード</label>
     </div>
-    <textarea class="textarea textarea-primary textarea-md w-full h-32 mb-4" placeholder="入力" v-model="inputText"></textarea>
-    <textarea class="textarea textarea-primary textarea-md w-full h-32" placeholder="出力" v-model="outputText"></textarea>
-    <button class="btn btn-primary w-40 mt-4 mb-4" @click="execute">実行</button>
-    <button class="btn btn-secondary w-40 mt-4 mb-4" :class="{ 'btn-disabled': isOutputEmpty }" v-clipboard:copy="outputText" v-clipboard:success="onSuccess" v-clipboard:error="onError" :aria-disabled="isOutputEmpty">結果をコピー</button>
-    <button class="btn btn-accent w-40 mb-4" @click="clear">クリア</button>
+    <textarea :class="textAreaClass" class="mb-4" placeholder="入力" v-model="inputText"></textarea>
+    <textarea :class="textAreaClass" placeholder="出力" v-model="outputText"></textarea>
+    <button class="btn btn-primary" :class="buttonClass" @click="execute">実行</button>
+    <button class="btn btn-secondary" :class="[isOutputEmpty ? 'btn-disabled' : '', buttonClass]" v-clipboard:copy="outputText" v-clipboard:success="onSuccess" v-clipboard:error="onError" :aria-disabled="isOutputEmpty">結果をコピー</button>
+    <button class="btn btn-accent" :class="buttonClass" @click="clear">クリア</button>
   </div>
 </template>
 
@@ -24,6 +24,11 @@ export default defineComponent({
     const option = ref('encode');
     const inputText = ref('');
     const outputText = ref('');
+
+    const radioClass = 'radio radio-primary';
+    const labelClass = 'label cursor-pointer';
+    const textAreaClass = 'textarea textarea-primary textarea-md w-full h-32';
+    const buttonClass = 'w-40 mt-4 mb-4';
 
     const onChange = (() => {
       inputText.value = '';
@@ -66,6 +71,10 @@ export default defineComponent({
       onSuccess,
       onError,
       isOutputEmpty,
+      radioClass,
+      labelClass,
+      textAreaClass,
+      buttonClass,
     }
   },
 })
