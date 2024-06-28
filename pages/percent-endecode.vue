@@ -58,7 +58,7 @@ export default defineComponent({
     const radioClass = 'radio radio-primary';
     const labelClass = 'label cursor-pointer';
     const textAreaClass = 'textarea textarea-primary textarea-md w-full h-32';
-    const buttonClass = 'w-40 mt-4 mb-4';
+    const buttonClass = 'w-40 mt-4';
 
     const onChange = (() => {
       inputText.value = '';
