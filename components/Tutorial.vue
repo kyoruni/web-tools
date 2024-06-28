@@ -1,6 +1,6 @@
 <!-- Please remove this file from your project -->
 <template>
-  <div class="tutorial">
+  <div class="tutorial p-2">
     <button class="btn">Button</button>
     <button class="btn btn-neutral">Neutral</button>
     <button class="btn btn-primary">Primary</button>
