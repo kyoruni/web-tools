@@ -11,7 +11,7 @@
     <textarea class="textarea textarea-primary textarea-md w-full h-32 mb-4" placeholder="入力" v-model="inputText"></textarea>
     <textarea class="textarea textarea-primary textarea-md w-full h-32" placeholder="出力" v-model="outputText"></textarea>
     <button class="btn btn-primary w-40 mt-4 mb-4">実行</button>
-    <button class="btn btn-secondary w-40 mt-4 mb-4">結果をコピー</button>
+    <button class="btn btn-secondary w-40 mt-4 mb-4" v-clipboard:copy="outputText" v-clipboard:success="onSuccess" v-clipboard:error="onError">結果をコピー</button>
   </div>
 </template>
 
@@ -28,11 +28,19 @@ export default defineComponent({
       inputText.value = '';
       outputText.value = '';
     });
+    const onSuccess = () => {
+      alert('コピーしました！');
+    };
+    const onError = () => {
+      alert('コピーに失敗しました…');
+    };
     return {
       option,
       inputText,
       outputText,
       onChange,
+      onSuccess,
+      onError,
     }
   },
 })
