@@ -12,6 +12,7 @@
     <textarea class="textarea textarea-primary textarea-md w-full h-32" placeholder="出力" v-model="outputText"></textarea>
     <button class="btn btn-primary w-40 mt-4 mb-4" @click="execute">実行</button>
     <button class="btn btn-secondary w-40 mt-4 mb-4" :class="{ 'btn-disabled': isOutputEmpty }" :aria-disabled="isOutputEmpty" @click="copyButton">結果をコピー</button>
+    <button class="btn btn-accent w-40 mb-4" @click="clear">クリア</button>
   </div>
 </template>
 
@@ -59,5 +60,10 @@ const copyButton = (() => {
   } else {
     alert('コピーに失敗しました…');
   }
+});
+
+const clear = (() => {
+  inputText.value = '';
+  outputText.value = '';
 });
 </script>
