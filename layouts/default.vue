@@ -1,0 +1,22 @@
+<template>
+  <div class="web-tools" data-theme="cupcake">
+    <!-- ヘッダー -->
+    <div class="navbar bg-primary text-primary-content">
+      <button class="btn btn-ghost text-xl">
+        <nuxt-link to="/">
+          kyoruni/web-tools
+        </nuxt-link>
+      </button>
+    </div>
+    <!-- コンテンツ -->
+    <div class="flex min-h-screen flex-col md:flex-row">
+      <Menu class="w-full md:w-1/4" style="background: pink;" />
+      <div class="content w-full md:w-3/4">
+        <slot />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+</script>

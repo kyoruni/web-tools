@@ -1,9 +1,9 @@
 <template>
   <nav class="menu">
     <ul class="menu bg-base-200 rounded-box">
-      <li><a>Item 1</a></li>
-      <li><a>Item 2</a></li>
-      <li><a>Item 3</a></li>
+      <li><nuxt-link to="/">indexindexindex</nuxt-link></li>
+      <li><nuxt-link to="/hoge">hogehogehoge</nuxt-link></li>
+      <li><nuxt-link to="/fuga">fugafugafuga</nuxt-link></li>
     </ul>
   </nav>
 </template>
