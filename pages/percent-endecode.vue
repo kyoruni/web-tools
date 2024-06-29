@@ -11,12 +11,15 @@
     <textarea class="textarea textarea-primary textarea-md w-full h-32 mb-4" placeholder="入力" v-model="inputText"></textarea>
     <textarea class="textarea textarea-primary textarea-md w-full h-32" placeholder="出力" v-model="outputText"></textarea>
     <button class="btn btn-primary w-40 mt-4 mb-4">実行</button>
-    <button class="btn btn-secondary w-40 mt-4 mb-4">結果をコピー</button>
+    <button class="btn btn-secondary w-40 mt-4 mb-4" @click="copyButton">結果をコピー</button>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { useClipboard } from '@vueuse/core';
+
+const { copy, copied } = useClipboard();
 
 const option = ref('encode');
 const inputText = ref('');
@@ -25,5 +28,14 @@ const outputText = ref('');
 const onChange = (() => {
   inputText.value = '';
   outputText.value = '';
+});
+
+const copyButton = (() => {
+  copy(outputText.value);
+  if (copied) {
+    alert('コピーしました！');
+  } else {
+    alert('コピーに失敗しました…');
+  }
 });
 </script>
