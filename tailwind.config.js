@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./components/**/*.{js,vue,ts}",
     "./layouts/**/*.vue",
@@ -17,6 +17,6 @@ module.exports = {
     themes: [
       "cupcake"
     ],
-  },
+  }
 }
 

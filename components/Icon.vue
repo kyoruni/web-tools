@@ -13,30 +13,21 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, toRefs, computed } from '@nuxtjs/composition-api'
+<script setup>
+import { computed } from "vue";
 
-export default defineComponent({
-  props: {
-    kind: {
-      type: String,
-      required: true
-    },
-  },
-  setup(props) {
-    const { kind } = toRefs(props);
+const props = defineProps({
+  kind: {
+    type: String,
+    required: true,
+  }
+});
 
-    const isHome = computed(() => {
-      return kind.value === 'home'
-    });
-    const isStar = computed(() => {
-      return kind.value === 'star'
-    });
-    return {
-      kind,
-      isHome,
-      isStar,
-    }
-  },
-})
+const isHome = computed(() => {
+  return props.kind === 'home'
+});
+
+const isStar = computed(() => {
+  return props.kind === 'star'
+});
 </script>
