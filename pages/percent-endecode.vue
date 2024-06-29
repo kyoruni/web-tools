@@ -28,7 +28,7 @@ const outputText = ref('');
 
 const radioClass = 'radio radio-primary';
 const labelClass = 'label cursor-pointer';
-const textAreaClass = 'textarea textarea-primary textarea-md w-full h-32';
+const textAreaClass = 'textarea textarea-primary textarea-md w-full h-32 rounded';
 const buttonClass = 'w-40 mt-4';
 
 const isInputEmpty = computed(() => {
