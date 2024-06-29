@@ -10,8 +10,8 @@
     </div>
     <textarea :class="textAreaClass" class="mb-4" placeholder="入力" v-model="inputText"></textarea>
     <textarea :class="textAreaClass" placeholder="出力" v-model="outputText"></textarea>
-    <button class="btn btn-primary" :class="buttonClass" @click="execute">実行</button>
-    <button class="btn btn-secondary" :class="[isOutputEmpty ? 'btn-disabled' : '', buttonClass]" :aria-disabled="isOutputEmpty" @click="copyButton">結果をコピー</button>
+    <button class="btn btn-primary mr-2" :class="buttonClass" @click="execute">実行</button>
+    <button class="btn btn-secondary mr-2" :class="[isOutputEmpty ? 'btn-disabled' : '', buttonClass]" :aria-disabled="isOutputEmpty" @click="copyButton">結果をコピー</button>
     <button class="btn btn-accent" :class="buttonClass" @click="clear">クリア</button>
   </div>
 </template>
