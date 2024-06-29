@@ -1,6 +1,6 @@
 <template>
   <div class="percent-endecode">
-    <h2 class="text-xl font-extrabold">パーセントエンコード/デコードするやつ</h2>
+    <h2 class="text-xl font-extrabold pt-4">パーセントエンコード/デコードするやつ</h2>
     <div class="divider"></div>
     <div class="flex items-center pb-4">
       <input type="radio" name="radio-1" id="hoge" class="radio radio-primary" checked="checked" />
