@@ -41,6 +41,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    'nuxt-clipboard2'
   ],
   server: {
     port: 7777,
