@@ -10,7 +10,7 @@
     </div>
     <textarea class="textarea textarea-primary textarea-md w-full h-32 mb-4" placeholder="入力" v-model="inputText"></textarea>
     <textarea class="textarea textarea-primary textarea-md w-full h-32" placeholder="出力" v-model="outputText"></textarea>
-    <button class="btn btn-primary w-40 mt-4 mb-4" :class="{ 'btn-disabled': isinputEmpty }" :aria-disabled="isinputEmpty">実行</button>
+    <button class="btn btn-primary w-40 mt-4 mb-4" :class="{ 'btn-disabled': isInputEmpty }" :aria-disabled="isInputEmpty">実行</button>
     <button class="btn btn-secondary w-40 mt-4 mb-4" :class="{ 'btn-disabled': isOutputEmpty }" :aria-disabled="isOutputEmpty" @click="copyButton">結果をコピー</button>
   </div>
 </template>
@@ -25,7 +25,7 @@ const option = ref('encode');
 const inputText = ref('');
 const outputText = ref('');
 
-const isinputEmpty = computed(() => {
+const isInputEmpty = computed(() => {
   return inputText.value.length === 0;
 });
 
