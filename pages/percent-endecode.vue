@@ -1,7 +1,6 @@
 <template>
   <div class="percent-endecode">
-    <h2 class="text-xl font-extrabold pt-4">パーセントエンコード/デコードするやつ</h2>
-    <div class="divider"></div>
+    <PageTitle :value="'パーセントエンコード・デコードするやつ'"/>
     <div class="flex items-center pb-4">
       <input type="radio" name="option" id="encode" :class="radioClass" value="encode" v-model="option" @change="onChange"/>
       <label for="encode" :class="labelClass" class="pr-4">エンコード</label>
@@ -45,7 +44,7 @@ const onChange = (() => {
 });
 
 const execute = (() => {
-  if (inputText.value.length === 0) {
+  if (isInputEmpty) {
     const optionKind = option.value === 'encode' ? 'エンコード' : 'デコード';
     alert(`${optionKind}したいテキストを入力してください！`);
     return;
