@@ -16,6 +16,7 @@
         {{ kind.displayName }}
       </option>
     </select>
+    <textarea class="textarea textarea-primary textarea-md w-full h-32 rounded mt-4 mb-4" placeholder="ここに出力されます" v-model="outputText"></textarea>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import { ref, onMounted } from 'vue';
 const widthType = ref('half'); // half or full
 const charType = ref('');
 const kinds = ref([]);
+const outputText = ref('');
 
 const radioClass = 'radio radio-primary';
 const labelClass = 'label cursor-pointer';
