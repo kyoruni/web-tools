@@ -57,6 +57,9 @@ const execute = (() => {
     case 'number':
       generateNumber();
       break;
+    case 'upperAlpha':
+      generateUpperAlpha();
+      break;
     default:
       alert('作成中');
   }
@@ -68,7 +71,17 @@ const generateNumber = (() => {
     chars = '0123456789';
   } else {
     chars = '０１２３４５６７８９';
-  };
+  }
+  outputText.value = generate(chars, charCount.value);
+});
+
+const generateUpperAlpha = (() => {
+  let chars = '';
+  if (isHalf.value) {
+    chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  } else {
+    chars = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ';
+  }
   outputText.value = generate(chars, charCount.value);
 });
 
