@@ -60,6 +60,9 @@ const execute = (() => {
     case 'upperAlpha':
       generateUpperAlpha();
       break;
+    case 'lowerAlpha':
+      generateLowerAlpha();
+      break;
     default:
       alert('作成中');
   }
@@ -81,6 +84,16 @@ const generateUpperAlpha = (() => {
     chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   } else {
     chars = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ';
+  }
+  outputText.value = generate(chars, charCount.value);
+});
+
+const generateLowerAlpha = (() => {
+  let chars = '';
+  if (isHalf.value) {
+    chars = 'abcdefghijklmnopqrstuvwxyz';
+  } else {
+    chars = 'ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ';
   }
   outputText.value = generate(chars, charCount.value);
 });
