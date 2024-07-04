@@ -1,12 +1,14 @@
 <template>
   <div class="string-generator">
     <PageTitle :value="'指定した字数の文字を作るやつ'" />
+    <p>widthType: {{ widthType }}</p>
+    <p>charType: {{ charType }}</p>
+    <p>kinds: {{ kinds }}</p>
     <div class="flex items-center pb-4">
       <input type="radio" name="widthType" id="half" :class="radioClass" value="half" v-model="widthType" />
       <label for="half" :class="labelClass" class="pr-4">半角</label>
       <input type="radio" name="widthType" id="full" :class="radioClass" value="full" v-model="widthType" />
       <label for="full" :class="labelClass">全角</label>
-      ({{ widthType }})
     </div>
     <select class="select select-primary w-full max-w-xs rounded" @change="selectKind">
       <option disabled selected>文字の種類を選択</option>
