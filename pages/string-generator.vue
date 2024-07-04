@@ -5,9 +5,9 @@
     <p>charType: {{ charType }}</p>
     <p>kinds: {{ kinds }}</p>
     <div class="flex items-center pb-4">
-      <input type="radio" name="widthType" id="half" :class="radioClass" value="half" v-model="widthType" />
+      <input type="radio" name="widthType" id="half" :class="radioClass" value="half" v-model="widthType" @change="selectHalf" />
       <label for="half" :class="labelClass" class="pr-4">半角</label>
-      <input type="radio" name="widthType" id="full" :class="radioClass" value="full" v-model="widthType" />
+      <input type="radio" name="widthType" id="full" :class="radioClass" value="full" v-model="widthType" @change="selectFull" />
       <label for="full" :class="labelClass">全角</label>
     </div>
     <select class="select select-primary w-full max-w-xs rounded" @change="selectKind">
@@ -32,11 +32,25 @@ const selectKind = ((event) => {
   charType.value = event.target.value;
 });
 
-onMounted(() => {
+const selectHalf = (() => {
   kinds.value = [
     { displayName: '数字', value: 'number' },
     { displayName: '英字(大文字)', value: 'upperAlpha' },
     { displayName: '英字(小文字)', value: 'lowerAlpha' },
   ];
+});
+
+const selectFull = (() => {
+  kinds.value = [
+    { displayName: '数字', value: 'number' },
+    { displayName: '英字(大文字)', value: 'upperAlpha' },
+    { displayName: '英字(小文字)', value: 'lowerAlpha' },
+    { displayName: 'ひらがな', value: 'lowerAlpha' },
+    { displayName: 'カタカナ', value: 'lowerAlpha' },
+  ];
+});
+
+onMounted(() => {
+  selectHalf();
 });
 </script>
