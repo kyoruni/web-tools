@@ -63,6 +63,9 @@ const execute = (() => {
     case 'lowerAlpha':
       generateLowerAlpha();
       break;
+    case 'hiragana':
+      generateHiragana();
+      break;
     default:
       alert('作成中');
   }
@@ -95,6 +98,11 @@ const generateLowerAlpha = (() => {
   } else {
     chars = 'ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ';
   }
+  outputText.value = generate(chars, charCount.value);
+});
+
+const generateHiragana = (() => {
+  const chars = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん';
   outputText.value = generate(chars, charCount.value);
 });
 
