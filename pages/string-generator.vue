@@ -8,6 +8,13 @@
       <label for="full" :class="labelClass">全角</label>
       ({{ charWidthType }})
     </div>
+    <select class="select select-primary w-full max-w-xs rounded">
+      <option disabled selected>文字の種類を選択</option>
+      <option>aaaaa</option>
+      <option>bbbbb</option>
+      <option>ccccc</option>
+      <option>ddddd</option>
+    </select>
   </div>
 </template>
 
