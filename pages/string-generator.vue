@@ -35,7 +35,16 @@ const kinds = ref([]);
 const charCount = ref(1);
 const outputText = ref('');
 
-const emojiRanges = {
+const charRanges = {
+  numberHalf: [0x0030, 0x0039], // 半角数字
+  numberFull: [0xFF10, 0xFF19], // 全角数字
+  upperAlphaHalf: [0x0041, 0x005A], // 半角英字(大)
+  upperAlphaFull: [0xFF21, 0xFF3A], // 全角英字(大)
+  lowerAlphaHalf: [0x0061, 0x007A], // 半角英字(小)
+  lowerAlphaFull: [0xFF41, 0xFF5A], // 全角英字(小)
+  hiragana: [0x3041, 0x3096], // ひらがな
+  katakanaHalf: [0xFF66, 0xFF9D], // 半角カタカナ
+  katakanaFull: [0x30A1, 0x30FA], // 全角カタカナ
   emoticons: [0x1F600, 0x1F64F], // 顔文字
   foods: [0x1F345, 0x1F37F], // たべもの
   animals: [0x1F400, 0x1F43F], // どうぶつ
@@ -57,81 +66,35 @@ const isHalf = computed(() => {
 const execute = (() => {
   switch (charType.value) {
     case 'number':
-      generateNumber();
+      generateCharacters(isHalf.value ? 'numberHalf' : 'numberFull');
       break;
     case 'upperAlpha':
-      generateUpperAlpha();
+      generateCharacters(isHalf.value ? 'upperAlphaHalf' : 'upperAlphaFull');
       break;
     case 'lowerAlpha':
-      generateLowerAlpha();
+      generateCharacters(isHalf.value ? 'lowerAlphaHalf' : 'lowerAlphaFull');
       break;
     case 'hiragana':
-      generateHiragana();
+      generateCharacters('hiragana');
       break;
     case 'katakana':
-      generateKatakana();
+      generateCharacters(isHalf.value ? 'katakanaHalf' : 'katakanaFull');
       break;
     case 'emoticons':
     case 'foods':
     case 'animals':
     case 'vehicles':
-      generateEmoji();
+      generateCharacters(charType.value);
       break;
     default:
       alert('作成中');
   }
 });
 
-const generateNumber = (() => {
-  let chars = '';
-  if (isHalf.value) {
-    chars = '0123456789';
-  } else {
-    chars = '０１２３４５６７８９';
-  }
-  outputText.value = generate(chars, charCount.value);
-});
-
-const generateUpperAlpha = (() => {
-  let chars = '';
-  if (isHalf.value) {
-    chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  } else {
-    chars = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ';
-  }
-  outputText.value = generate(chars, charCount.value);
-});
-
-const generateLowerAlpha = (() => {
-  let chars = '';
-  if (isHalf.value) {
-    chars = 'abcdefghijklmnopqrstuvwxyz';
-  } else {
-    chars = 'ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ';
-  }
-  outputText.value = generate(chars, charCount.value);
-});
-
-const generateHiragana = (() => {
-  const chars = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽぁぃぅぇぉっゃゅょ';
-  outputText.value = generate(chars, charCount.value);
-});
-
-const generateKatakana = (() => {
-  let chars = '';
-  if (isHalf.value) {
-    chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｵﾝﾝﾞﾟｧｨｩｪｫｯｬｭｮｰ';
-  } else {
-    chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワオンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポァィゥェォッャュョ';
-  }
-  outputText.value = generate(chars, charCount.value);
-});
-
-
-const generateEmoji = (() => {
+const generateCharacters = ((selectedCharType) => {
   const count = charCount.value;
   let result = '';
-  const range = emojiRanges[charType.value]; // 選択された範囲を取得
+  const range = charRanges[selectedCharType]; // 選択された範囲を取得
   const rangeCount = range[1] - range[0] + 1; // 現在の範囲内の絵文字の数を計算
 
   let i = 0;
@@ -142,15 +105,6 @@ const generateEmoji = (() => {
 
   outputText.value = result;
 });
-
-const generate = (chars, length) => {
-  let result = '';
-  const charsLength = chars.length;
-  for (let i = 0; i < length; i++) {
-    result += chars[i % charsLength];
-  }
-  return result;
-};
 
 const selectHalf = (() => {
   charType.value = '';
