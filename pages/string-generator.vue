@@ -40,6 +40,10 @@ const kinds = ref([]);
 const charCount = ref(1);
 const outputText = ref('');
 
+const emojiRanges = [
+  [0x1F600, 0x1F64F], // Emoticons 顔文字
+];
+
 const radioClass = 'radio radio-primary';
 const labelClass = 'label cursor-pointer';
 const buttonClass = 'w-40 mt-4';
@@ -68,6 +72,9 @@ const execute = (() => {
       break;
     case 'katakana':
       generateKatakana();
+      break;
+    case 'emoji':
+      generateEmoji();
       break;
     default:
       alert('作成中');
@@ -119,6 +126,39 @@ const generateKatakana = (() => {
   outputText.value = generate(chars, charCount.value);
 });
 
+const generateEmoji = (() => {
+  let start = 0;
+  const count = charCount.value;
+  let result = '';
+  let totalCount = 0;
+  while (result.length < count) {
+    // 絵文字の範囲のループ
+    for (const emojiRange of emojiRanges) {
+      // 範囲内の絵文字の数
+      const rangeCount = emojiRange[1] - emojiRange[0] + 1;
+      // 開始位置が範囲の外に出ていない場合
+      if (start < totalCount + rangeCount) {
+        // 開始位置を範囲内に入れる
+        const rangeStart = emojiRange[0] + (start - totalCount);
+        // 範囲内で必要な絵文字の数を取得
+        for (let i = rangeStart; i <= emojiRange[1] && result.length < count; i++) {
+          result += String.fromCodePoint(i);
+        }
+        if (result.length >= count) {
+          break;
+        }
+      }
+      // 現在の範囲の絵文字数を合計に追加
+      totalCount += rangeCount;
+    }
+    // 全範囲を一度通り過ぎたらカウントをリセット
+    totalCount = 0;
+    // 最初からループするために開始位置をリセット
+    start = 0;
+  }
+  outputText.value = result;
+});
+
 const generate = (chars, length) => {
   let result = '';
   const charsLength = chars.length;
@@ -146,6 +186,7 @@ const selectFull = (() => {
     { displayName: '英字(小文字)', value: 'lowerAlpha' },
     { displayName: 'ひらがな', value: 'hiragana' },
     { displayName: 'カタカナ', value: 'katakana' },
+    { displayName: '絵文字', value: 'emoji'}
   ];
 });
 
