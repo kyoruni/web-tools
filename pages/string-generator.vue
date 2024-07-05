@@ -109,10 +109,18 @@ const generateCharacters = ((selectedCharType) => {
   const range = charRanges[selectedCharType]; // 選択された範囲を取得
   const rangeCount = range[1] - range[0] + 1; // 現在の範囲内の絵文字の数を計算
 
-  let i = 0;
-  while (Array.from(result).length < count) {
-    result += String.fromCodePoint(range[0] + (i % rangeCount));
-    i++;
+  const loopSize = 1000; // 一度に処理する件数
+  const loopCount = Math.ceil(count / loopSize);
+  let currentLength = 0;
+
+  for (let currentLoopCount = 0; currentLoopCount < loopCount; currentLoopCount++) {
+    let tmpResult = '';
+    for (let i = 0; i < loopSize && currentLength < count; i++) {
+      const codePoint = range[0] + ((currentLoopCount * loopSize + i) % rangeCount);
+      tmpResult += String.fromCodePoint(codePoint);
+      currentLength++;
+    }
+    result += tmpResult;
   }
 
   outputText.value = result;
