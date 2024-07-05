@@ -102,7 +102,7 @@ const generateLowerAlpha = (() => {
 });
 
 const generateHiragana = (() => {
-  const chars = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん';
+  const chars = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐうゑをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽぁぃぅぇぉっゃゅょ';
   outputText.value = generate(chars, charCount.value);
 });
 
