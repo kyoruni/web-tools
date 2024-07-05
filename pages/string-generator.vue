@@ -112,7 +112,7 @@ const generateHiragana = (() => {
 const generateKatakana = (() => {
   let chars = '';
   if (isHalf.value) {
-    chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｵﾝｶﾞｷﾞｸﾞｹﾞｺﾞｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟｧｨｩｪｫｯｬｭｮ';
+    chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｵﾝﾝﾞﾟｧｨｩｪｫｯｬｭｮｰ';
   } else {
     chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワオンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポァィゥェォッャュョ';
   }
@@ -134,6 +134,7 @@ const selectHalf = (() => {
     { displayName: '数字', value: 'number' },
     { displayName: '英字(大文字)', value: 'upperAlpha' },
     { displayName: '英字(小文字)', value: 'lowerAlpha' },
+    { displayName: 'カタカナ', value: 'katakana' },
   ];
 });
 
