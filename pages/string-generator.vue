@@ -1,11 +1,6 @@
 <template>
   <div class="string-generator">
     <PageTitle :value="'指定した字数の文字を作るやつ'" />
-    <p>widthType: {{ widthType }}</p>
-    <p>charType: {{ charType }}</p>
-    <p>kinds: {{ kinds }}</p>
-    <p>charCount: {{ charCount }}</p>
-    <p>isHalf: {{ isHalf }}</p>
     <div class="flex items-center pb-4">
       <input type="radio" name="widthType" id="half" :class="radioClass" value="half" v-model="widthType" @change="selectHalf" />
       <label for="half" :class="labelClass" class="pr-4">半角</label>
