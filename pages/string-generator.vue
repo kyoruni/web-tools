@@ -22,7 +22,7 @@
     </div>
     <textarea class="textarea textarea-primary textarea-md w-full h-32 rounded mt-4 mb-4" placeholder="ここに出力されます" v-model="outputText"></textarea>
     <button class="btn btn-primary mr-2" :class="[isInvalidExecute ? 'btn-disabled' : '', buttonClass]" @click="execute">実行</button>
-    <button class="btn btn-secondary mr-2" :class="buttonClass" @click="copyButton">結果をコピー</button>
+    <button class="btn btn-secondary mr-2" :class="[isOutputEmpty ? 'btn-disabled' : '', buttonClass]" @click="copyButton">結果をコピー</button>
     <button class="btn btn-accent" :class="buttonClass" @click="clear">クリア</button>
   </div>
 </template>
@@ -60,6 +60,10 @@ const buttonClass = 'w-40 mt-4';
 
 const isInvalidExecute = computed(() => {
   return !charType.value || charCount.value === 0;
+});
+
+const isOutputEmpty = computed(() => {
+  return outputText.value.length === 0;
 });
 
 const isHalf = computed(() => {
