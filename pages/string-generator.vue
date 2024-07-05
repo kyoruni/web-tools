@@ -23,7 +23,7 @@
     <textarea class="textarea textarea-primary textarea-md w-full h-32 rounded mt-4 mb-4" placeholder="ここに出力されます" v-model="outputText"></textarea>
     <button class="btn btn-primary mr-2" :class="[isInvalidExecute ? 'btn-disabled' : '', buttonClass]" @click="execute">実行</button>
     <button class="btn btn-secondary mr-2" :class="buttonClass">結果をコピー</button>
-    <button class="btn btn-accent" :class="buttonClass">クリア</button>
+    <button class="btn btn-accent" :class="buttonClass" @click="clear">クリア</button>
   </div>
 </template>
 
@@ -129,6 +129,13 @@ const selectFull = (() => {
     { displayName: '絵文字(どうぶつ)', value: 'animals'},
     { displayName: '絵文字(のりもの)', value: 'vehicles'},
   ];
+});
+
+const clear = (() => {
+  widthType.value = 'half';
+  selectHalf();
+  charCount.value = 1;
+  outputText.value = '';
 });
 
 onMounted(() => {
