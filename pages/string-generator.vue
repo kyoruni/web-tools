@@ -22,13 +22,16 @@
     </div>
     <textarea class="textarea textarea-primary textarea-md w-full h-32 rounded mt-4 mb-4" placeholder="ここに出力されます" v-model="outputText"></textarea>
     <button class="btn btn-primary mr-2" :class="[isInvalidExecute ? 'btn-disabled' : '', buttonClass]" @click="execute">実行</button>
-    <button class="btn btn-secondary mr-2" :class="buttonClass">結果をコピー</button>
+    <button class="btn btn-secondary mr-2" :class="buttonClass" @click="copyButton">結果をコピー</button>
     <button class="btn btn-accent" :class="buttonClass" @click="clear">クリア</button>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import { useClipboard } from '@vueuse/core';
+
+const { copy, copied } = useClipboard();
 const widthType = ref('half'); // half or full
 const charType = ref('');
 const kinds = ref([]);
@@ -129,6 +132,15 @@ const selectFull = (() => {
     { displayName: '絵文字(どうぶつ)', value: 'animals'},
     { displayName: '絵文字(のりもの)', value: 'vehicles'},
   ];
+});
+
+const copyButton = (() => {
+  copy(outputText.value);
+  if (copied) {
+    alert('コピーしました！');
+  } else {
+    alert('コピーに失敗しました…');
+  }
 });
 
 const clear = (() => {
