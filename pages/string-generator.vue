@@ -40,9 +40,12 @@ const kinds = ref([]);
 const charCount = ref(1);
 const outputText = ref('');
 
-const emojiRanges = [
-  [0x1F600, 0x1F64F], // Emoticons 顔文字
-];
+const emojiRanges = {
+  emoticons: [0x1F600, 0x1F64F], // 顔文字
+  foods: [0x1F345, 0x1F37F], // たべもの
+  animals: [0x1F400, 0x1F43F], // どうぶつ
+  vehicles: [0x1F680, 0x1F6A4], // のりもの
+};
 
 const radioClass = 'radio radio-primary';
 const labelClass = 'label cursor-pointer';
@@ -73,7 +76,10 @@ const execute = (() => {
     case 'katakana':
       generateKatakana();
       break;
-    case 'emoji':
+    case 'emoticons':
+    case 'foods':
+    case 'animals':
+    case 'vehicles':
       generateEmoji();
       break;
     default:
@@ -126,36 +132,19 @@ const generateKatakana = (() => {
   outputText.value = generate(chars, charCount.value);
 });
 
+
 const generateEmoji = (() => {
-  let start = 0;
   const count = charCount.value;
   let result = '';
-  let totalCount = 0;
+  const range = emojiRanges[charType.value]; // 選択された範囲を取得
+  const rangeCount = range[1] - range[0] + 1; // 現在の範囲内の絵文字の数を計算
+
+  let i = 0;
   while (result.length < count) {
-    // 絵文字の範囲のループ
-    for (const emojiRange of emojiRanges) {
-      // 範囲内の絵文字の数
-      const rangeCount = emojiRange[1] - emojiRange[0] + 1;
-      // 開始位置が範囲の外に出ていない場合
-      if (start < totalCount + rangeCount) {
-        // 開始位置を範囲内に入れる
-        const rangeStart = emojiRange[0] + (start - totalCount);
-        // 範囲内で必要な絵文字の数を取得
-        for (let i = rangeStart; i <= emojiRange[1] && result.length < count; i++) {
-          result += String.fromCodePoint(i);
-        }
-        if (result.length >= count) {
-          break;
-        }
-      }
-      // 現在の範囲の絵文字数を合計に追加
-      totalCount += rangeCount;
-    }
-    // 全範囲を一度通り過ぎたらカウントをリセット
-    totalCount = 0;
-    // 最初からループするために開始位置をリセット
-    start = 0;
+    result += String.fromCodePoint(range[0] + (i % rangeCount));
+    i++;
   }
+
   outputText.value = result;
 });
 
@@ -186,7 +175,10 @@ const selectFull = (() => {
     { displayName: '英字(小文字)', value: 'lowerAlpha' },
     { displayName: 'ひらがな', value: 'hiragana' },
     { displayName: 'カタカナ', value: 'katakana' },
-    { displayName: '絵文字', value: 'emoji'}
+    { displayName: '絵文字(顔文字)', value: 'emoticons'},
+    { displayName: '絵文字(たべもの)', value: 'foods'},
+    { displayName: '絵文字(どうぶつ)', value: 'animals'},
+    { displayName: '絵文字(のりもの)', value: 'vehicles'},
   ];
 });
 
