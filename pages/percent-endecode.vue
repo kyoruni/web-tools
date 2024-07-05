@@ -44,7 +44,7 @@ const onChange = (() => {
 });
 
 const execute = (() => {
-  if (isInputEmpty) {
+  if (isInputEmpty.value) {
     const optionKind = option.value === 'encode' ? 'エンコード' : 'デコード';
     alert(`${optionKind}したいテキストを入力してください！`);
     return;
