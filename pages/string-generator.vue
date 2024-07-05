@@ -59,7 +59,8 @@ const labelClass = 'label cursor-pointer';
 const buttonClass = 'w-40 mt-4';
 
 const isInvalidExecute = computed(() => {
-  return !charType.value || charCount.value === 0;
+  const isNumber = !isNaN(charCount.value) && Number.isInteger(charCount.value);
+  return !charType.value || charCount.value === 0 || !isNumber;
 });
 
 const isOutputEmpty = computed(() => {
@@ -71,6 +72,10 @@ const isHalf = computed(() => {
 });
 
 const execute = (() => {
+  if (isInvalidExecute.value) {
+    alert('数値を指定してください！');
+    return;
+  }
   switch (charType.value) {
     case 'number':
       generateCharacters(isHalf.value ? 'numberHalf' : 'numberFull');
