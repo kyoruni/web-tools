@@ -39,7 +39,6 @@ const imageUrl = ref('');
 const buttonClass = 'w-40 mt-4';
 
 const execute = () => {
-  alert('execute');
   generateImage();
 }
 
@@ -55,6 +54,12 @@ const generateImage = () => {
 
   context.fillStyle = '#ff99cc';
   context.fillRect(0, 0, canvas.width, canvas.height);
+
+  context.font = '20px Arial';
+  context.fillStyle = '#0000ff';
+  context.textAlign = 'center';
+  context.textBaseline = 'middle';
+  context.fillText(`${width.value} × ${height.value}`, canvas.width / 2, canvas.height / 2);
 
   imageUrl.value = canvas.toDataURL('image/png');
 }
