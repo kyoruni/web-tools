@@ -21,6 +21,8 @@
           v-model="height"/>
       </div>
     </div>
+    <button class="btn btn-primary mr-2" :class="buttonClass" @click="execute">実行</button>
+    <button class="btn btn-accent" :class="buttonClass" @click="clear">クリア</button>
   </div>
 </template>
 
@@ -29,4 +31,14 @@ import { ref } from 'vue';
 
 const width = ref(300);
 const height = ref(300);
+
+const buttonClass = 'w-40 mt-4';
+
+const execute = () => {
+  alert('execute');
+}
+
+const clear = () => {
+  alert('clear');
+}
 </script>
