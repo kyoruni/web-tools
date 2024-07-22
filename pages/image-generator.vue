@@ -23,6 +23,9 @@
     </div>
     <button class="btn btn-primary mr-2" :class="buttonClass" @click="execute">実行</button>
     <button class="btn btn-accent" :class="buttonClass" @click="clear">クリア</button>
+    <div class="mt-4" v-if="imageUrl">
+      <img :src="imageUrl" :alt="`${width}x${height}`"/>
+    </div>
   </div>
 </template>
 
@@ -31,14 +34,28 @@ import { ref } from 'vue';
 
 const width = ref(300);
 const height = ref(300);
+const imageUrl = ref('');
 
 const buttonClass = 'w-40 mt-4';
 
 const execute = () => {
   alert('execute');
+  generateImage();
 }
 
 const clear = () => {
   alert('clear');
+}
+
+const generateImage = () => {
+  const canvas = document.createElement('canvas');
+  canvas.width = width.value;
+  canvas.height = height.value;
+  const context = canvas.getContext('2d');
+
+  context.fillStyle = '#ff99cc';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  imageUrl.value = canvas.toDataURL('image/png');
 }
 </script>
