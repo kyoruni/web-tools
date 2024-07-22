@@ -43,7 +43,11 @@ const execute = () => {
 }
 
 const clear = () => {
-  alert('clear');
+  if (window.confirm('クリアしますか？')) {
+    width.value = 300;
+    height.value = 300;
+    imageUrl.value = '';
+  }
 }
 
 const generateImage = () => {
