@@ -2,7 +2,7 @@
   <div class="image-generator">
     <PageTitle :value="'指定した大きさの画像を作るやつ'" />
     <div class="flex">
-      <div class="form-control">
+      <div class="form-control pr-2">
         <div class="label">
           <span class="label-text">幅(px)</span>
         </div>
@@ -20,8 +20,16 @@
           class="input input-bordered input-primary block w-full max-w-40 rounded ml-2"
           v-model="height"/>
       </div>
-      <Twitter v-model="currentColor"/>
-      <p>{{ currentColor.hex }}</p>
+      <p>{{ currentBackgroundColor.hex }}</p>
+    </div>
+    <!-- 2段目 -->
+    <div class="flex mt-2">
+      <div class="form-control">
+        <div class="label mb-2">
+          <span class="label-text">背景色</span>
+        </div>
+        <Twitter v-model="currentBackgroundColor"/>
+      </div>
     </div>
     <button class="btn btn-primary mr-2" :class="buttonClass" @click="execute">実行</button>
     <button class="btn btn-accent" :class="buttonClass" @click="clearButton">クリア</button>
@@ -38,7 +46,7 @@ import { Twitter } from '@ckpack/vue-color';
 const width = ref(300);
 const height = ref(300);
 const imageUrl = ref('');
-const currentColor = ref({hex: '#FF99CC'});
+const currentBackgroundColor = ref({hex: '#FF99CC'});
 
 const buttonClass = 'w-40 mt-4';
 
@@ -65,7 +73,7 @@ const generateImage = () => {
   canvas.height = height.value;
   const context = canvas.getContext('2d');
 
-  context.fillStyle = currentColor.value.hex;
+  context.fillStyle = currentBackgroundColor.value.hex;
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   context.font = '20px Arial';
