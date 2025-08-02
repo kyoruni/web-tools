@@ -41,6 +41,8 @@
         <Twitter v-model="currentFontColor"/>
       </div>
     </div>
+    <!-- ダウンロードボタン -->
+    <a :href="imageUrl" :download="fileName" class="btn btn-primary mt-4 mr-2 w-40">画像を保存</a>
     <!-- 出力画像 -->
     <div class="mt-4" v-if="imageUrl">
       <img :src="imageUrl" :alt="`${width}x${height}`"/>
@@ -49,7 +51,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
+import { computed, ref, watch, onMounted } from 'vue';
 import { Twitter } from '@ckpack/vue-color';
 
 const width = ref(300);
@@ -57,6 +59,10 @@ const height = ref(300);
 const imageUrl = ref('');
 const currentBackgroundColor = ref({hex: '#0000FF'});
 const currentFontColor = ref({hex: '#FFA500'});
+
+const fileName = computed(() => {
+  return `width_${width.value}_and_height_${height.value}.png`;
+});
 
 const generateImage = () => {
   const canvas = document.createElement('canvas');
