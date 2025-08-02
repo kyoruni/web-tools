@@ -1,7 +1,9 @@
 <template>
   <div class="image-generator">
     <PageTitle :value="'指定した大きさの画像を作るやつ'" />
+    <!-- 1段目 -->
     <div class="flex">
+      <!-- 幅 -->
       <div class="form-control pr-2">
         <div class="label">
           <span class="label-text">幅(px)</span>
@@ -11,6 +13,7 @@
           class="input input-bordered input-primary block w-full max-w-40 rounded ml-2"
           v-model="width"/>
       </div>
+      <!-- 高さ -->
       <div class="form-control">
         <div class="label">
           <span class="label-text">高さ(px)</span>
@@ -39,8 +42,7 @@
         <Twitter v-model="currentFontColor"/>
       </div>
     </div>
-    <button class="btn btn-primary mr-2" :class="buttonClass" @click="execute">実行</button>
-    <button class="btn btn-accent" :class="buttonClass" @click="clearButton">クリア</button>
+    <!-- 出力画像 -->
     <div class="mt-4" v-if="imageUrl">
       <img :src="imageUrl" :alt="`${width}x${height}`"/>
     </div>
@@ -48,7 +50,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { Twitter } from '@ckpack/vue-color';
 
 const width = ref(300);
@@ -56,25 +58,6 @@ const height = ref(300);
 const imageUrl = ref('');
 const currentBackgroundColor = ref({hex: '#0000FF'});
 const currentFontColor = ref({hex: '#FFA500'});
-
-const buttonClass = 'w-40 mt-4';
-
-const execute = () => {
-  clear();
-  generateImage();
-}
-
-const clear = () => {
-  width.value = 300;
-  height.value = 300;
-  imageUrl.value = '';
-}
-
-const clearButton = () => {
-  if (window.confirm('クリアしますか？')) {
-    clear();
-  }
-}
 
 const generateImage = () => {
   const canvas = document.createElement('canvas');
@@ -93,4 +76,12 @@ const generateImage = () => {
 
   imageUrl.value = canvas.toDataURL('image/png');
 }
+
+onMounted(() => {
+  generateImage();
+});
+
+watch([width, height, currentBackgroundColor, currentFontColor], () => {
+  generateImage();
+});
 </script>
