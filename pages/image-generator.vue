@@ -20,9 +20,11 @@
           class="input input-bordered input-primary block w-full max-w-40 rounded ml-2"
           v-model="height"/>
       </div>
+      <Twitter v-model="currentColor"/>
+      <p>{{ currentColor.hex }}</p>
     </div>
     <button class="btn btn-primary mr-2" :class="buttonClass" @click="execute">実行</button>
-    <button class="btn btn-accent" :class="buttonClass" @click="clear">クリア</button>
+    <button class="btn btn-accent" :class="buttonClass" @click="clearButton">クリア</button>
     <div class="mt-4" v-if="imageUrl">
       <img :src="imageUrl" :alt="`${width}x${height}`"/>
     </div>
@@ -30,23 +32,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { Twitter } from '@ckpack/vue-color';
 
 const width = ref(300);
 const height = ref(300);
 const imageUrl = ref('');
+const currentColor = ref({hex: '#FF99CC'});
 
 const buttonClass = 'w-40 mt-4';
 
 const execute = () => {
+  clear();
   generateImage();
 }
 
 const clear = () => {
+  width.value = 300;
+  height.value = 300;
+  imageUrl.value = '';
+}
+
+const clearButton = () => {
   if (window.confirm('クリアしますか？')) {
-    width.value = 300;
-    height.value = 300;
-    imageUrl.value = '';
+    clear();
   }
 }
 
@@ -56,7 +65,7 @@ const generateImage = () => {
   canvas.height = height.value;
   const context = canvas.getContext('2d');
 
-  context.fillStyle = '#ff99cc';
+  context.fillStyle = currentColor.value.hex;
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   context.font = '20px Arial';
