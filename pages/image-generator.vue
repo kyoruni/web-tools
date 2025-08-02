@@ -31,7 +31,9 @@
         <div class="label mb-2">
           <span class="label-text">背景色</span>
         </div>
-        <Twitter v-model="currentBackgroundColor"/>
+        <ClientOnly>
+          <Twitter v-model="currentBackgroundColor"/>
+        </ClientOnly>
       </div>
       <!-- 文字色 -->
       <div class="form-control ml-4">
