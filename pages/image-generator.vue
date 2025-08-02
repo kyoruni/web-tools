@@ -24,11 +24,19 @@
     </div>
     <!-- 2段目 -->
     <div class="flex mt-2">
+      <!-- 背景色 -->
       <div class="form-control">
         <div class="label mb-2">
           <span class="label-text">背景色</span>
         </div>
         <Twitter v-model="currentBackgroundColor"/>
+      </div>
+      <!-- 文字色 -->
+      <div class="form-control ml-4">
+        <div class="label mb-2">
+          <span class="label-text">文字色</span>
+        </div>
+        <Twitter v-model="currentFontColor"/>
       </div>
     </div>
     <button class="btn btn-primary mr-2" :class="buttonClass" @click="execute">実行</button>
@@ -46,7 +54,8 @@ import { Twitter } from '@ckpack/vue-color';
 const width = ref(300);
 const height = ref(300);
 const imageUrl = ref('');
-const currentBackgroundColor = ref({hex: '#FF99CC'});
+const currentBackgroundColor = ref({hex: '#0000FF'});
+const currentFontColor = ref({hex: '#FFA500'});
 
 const buttonClass = 'w-40 mt-4';
 
@@ -77,7 +86,7 @@ const generateImage = () => {
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   context.font = '20px Arial';
-  context.fillStyle = '#0000ff';
+  context.fillStyle = currentFontColor.value.hex;
   context.textAlign = 'center';
   context.textBaseline = 'middle';
   context.fillText(`${width.value} × ${height.value}`, canvas.width / 2, canvas.height / 2);
