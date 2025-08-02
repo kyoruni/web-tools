@@ -43,6 +43,7 @@
     </div>
     <!-- ダウンロードボタン -->
     <a :href="imageUrl" :download="fileName" class="btn btn-primary mt-4 mr-2 w-40">画像を保存</a>
+    <button class="btn btn-accent w-40" @click="clear">クリア</button>
     <!-- 出力画像 -->
     <div class="mt-4" v-if="imageUrl">
       <img :src="imageUrl" :alt="`${width}x${height}`"/>
@@ -81,6 +82,14 @@ const generateImage = () => {
 
   imageUrl.value = canvas.toDataURL('image/png');
 }
+
+const clear = () => {
+  width.value = 300;
+  height.value = 300;
+  currentBackgroundColor.value = {hex: '#0000FF'};
+  currentFontColor.value = {hex: '#FFA500'};
+  generateImage();
+};
 
 onMounted(() => {
   generateImage();
