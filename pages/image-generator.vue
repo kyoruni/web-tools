@@ -23,7 +23,6 @@
           class="input input-bordered input-primary block w-full max-w-40 rounded ml-2"
           v-model="height"/>
       </div>
-      <p>{{ currentBackgroundColor.hex }}</p>
     </div>
     <!-- 2段目 -->
     <div class="flex mt-2">
