@@ -25,7 +25,7 @@
       </div>
     </div>
     <!-- 2段目 -->
-    <div class="flex mt-2">
+    <div class="flex flex-col md:flex-row mt-2">
       <!-- 背景色 -->
       <div class="form-control">
         <div class="label mb-2">
@@ -36,7 +36,7 @@
         </ClientOnly>
       </div>
       <!-- 文字色 -->
-      <div class="form-control ml-4">
+      <div class="form-control md:ml-4 mt-4 md:mt-0">
         <div class="label mb-2">
           <span class="label-text">文字色</span>
         </div>
